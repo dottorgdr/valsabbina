@@ -1,53 +1,182 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=no"
+  >
+
   <title>Documenti First Cisl</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      margin: 0;
+      min-height: 100vh;
       background-image: url("prova.jpg");
       background-size: 1000px;
       background-repeat: no-repeat;
-      background-position-x: center;
-      font-family: Arial, sans-serif;
+      background-position: center top;
+      background-attachment: fixed;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .button {
-      border: none;
-      color: white;
-      padding: 15px 32px;
+    /* MENU PRINCIPALE IN ALTO */
+
+    .main-menu-bar {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      width: 100%;
+      padding: 14px 10px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .main-menu-button {
+      display: inline-block;
+      width: min(94%, 700px);
+      padding: 17px 24px;
+      border: 3px solid #ffffff;
+      border-radius: 12px;
+      background-color: #06573a;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.3;
       text-align: center;
       text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+      transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
-    .button1 { background-color: #06573a; }
-    .button2 { background-color: #6e0942; }
-    .button3 { background-color: #151a9a; }
-    .buttonSearch { background-color: #0b4f8a; }
+    .main-menu-button:hover {
+      background-color: #043e2a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+    }
+
+    .main-menu-button:active {
+      transform: translateY(0);
+    }
+
+    /* CONTENITORE GENERALE */
+
+    .page-container {
+      width: min(96%, 1000px);
+      margin: 35px auto;
+      padding: 10px;
+    }
+
+    /* PULSANTI DELLE SEZIONI */
+
+    .button {
+      display: inline-block;
+      width: min(94%, 620px);
+      margin: 5px 2px;
+      padding: 15px 32px;
+      border: none;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1.3;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, 0.18);
+      transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      filter: brightness(0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 13px rgba(0, 0, 0, 0.24);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .button1 {
+      background-color: #06573a;
+    }
+
+    .button2 {
+      background-color: #6e0942;
+    }
+
+    .button3 {
+      background-color: #151a9a;
+    }
+
+    .buttonSearch {
+      width: auto;
+      min-width: 120px;
+      background-color: #0b4f8a;
+      vertical-align: middle;
+    }
+
+    /* AREA DI RICERCA */
 
     .search-box {
-      text-align: center;
-      margin: 30px auto;
+      width: 100%;
       max-width: 900px;
-      background: rgba(255,255,255,0.92);
-      padding: 20px;
+      margin: 0 auto 35px auto;
+      padding: 22px;
       border-radius: 14px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+      text-align: center;
+    }
+
+    .search-box h2 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: #0b4f8a;
+    }
+
+    .search-controls {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .search-input {
-      width: min(90%, 520px);
+      flex: 1;
+      min-width: 250px;
+      max-width: 600px;
       padding: 14px;
-      font-size: 16px;
-      border: 1px solid #bbb;
+      border: 1px solid #aaaaaa;
       border-radius: 8px;
-      margin-right: 8px;
+      background-color: #ffffff;
+      color: #222222;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: #0b4f8a;
+      box-shadow: 0 0 0 3px rgba(11, 79, 138, 0.14);
     }
 
     #searchResults {
@@ -56,12 +185,12 @@
     }
 
     .result-card {
-      background: #ffffff;
+      margin: 12px 0;
+      padding: 14px 16px;
       border-left: 6px solid #0b4f8a;
       border-radius: 10px;
-      padding: 14px 16px;
-      margin: 12px 0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .result-card h3 {
@@ -71,7 +200,7 @@
 
     .result-card p {
       margin: 0;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     .result-card a {
@@ -80,146 +209,394 @@
       text-decoration: none;
     }
 
+    .result-card a:hover {
+      text-decoration: underline;
+    }
+
+    mark {
+      padding: 1px 2px;
+      border-radius: 2px;
+      background-color: #ffeb3b;
+    }
+
+    /* SEZIONI DOCUMENTI */
+
     .section {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 22px 15px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.91);
       text-align: center;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    .section h1 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 27px;
+    }
+
+    .green-title {
+      color: #06573a;
+    }
+
+    .purple-title {
+      color: #6e0942;
+    }
+
+    .blue-title {
+      color: #151a9a;
+    }
+
+    /* RESPONSIVE */
+
+    @media screen and (max-width: 650px) {
+      body {
+        background-size: cover;
+        background-attachment: scroll;
+      }
+
+      .main-menu-bar {
+        padding: 10px 8px;
+      }
+
+      .main-menu-button {
+        width: 100%;
+        padding: 14px 10px;
+        font-size: 15px;
+      }
+
+      .page-container {
+        width: 100%;
+        margin-top: 20px;
+        padding: 8px;
+      }
+
+      .search-box,
+      .section {
+        padding: 18px 12px;
+      }
+
+      .search-box h2 {
+        font-size: 21px;
+      }
+
+      .search-input {
+        width: 100%;
+        min-width: 100%;
+      }
+
+      .buttonSearch {
+        width: 100%;
+      }
+
+      .button {
+        width: 100%;
+        margin: 5px 0;
+        padding: 14px 10px;
+        font-size: 14px;
+      }
+
+      .section h1 {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <br><br><br>
 
-  <div class="search-box">
-    <h2 style="margin-top:0; color:#0b4f8a;">Ricerca nei documenti HTML</h2>
-    <input
-      type="text"
-      id="searchInput"
-      class="search-input"
-      placeholder="Scrivi una parola chiave, ad esempio: mutui, assicurazioni, permessi..."
-      onkeydown="if(event.key === 'Enter') searchPages();"
+  <!-- PULSANTE PER TORNARE AL MENU PRINCIPALE -->
+
+  <div class="main-menu-bar">
+    <a
+      class="main-menu-button"
+      href="https://script.google.com/macros/s/AKfycbx-1cpydI0DhY7VeG33OyEGHh6vs_nbsqr2_nRA8EkehkiAI-hLVwmLd_HAg9JIlrvJ/exec"
+      target="_top"
+      rel="noopener"
     >
-    <button class="button buttonSearch" onclick="searchPages()">CERCA</button>
-    <div id="searchResults"></div>
+      ← MENU PRINCIPALE PROSELITISMO VALSABBINA
+    </a>
   </div>
 
-  <div class="section">
-    <h1 style="color: #06573a;">CONTRATTO INTEGRATIVO</h1>
+  <main class="page-container">
 
-    <a href="contrattointegrativo.html"><button class="button button1">CONTRATTO INTEGRATIVO</button></a><br>
-    <a href="mutui.html"><button class="button button1">MUTUI, PRESTITI, CONTI CONVENZIONATI</button></a><br>
-    <a href="personale.html"><button class="button button1">PERSONALE</button></a><br>
-    <a href="vap.html"><button class="button button1">VAP</button></a><br>
-  </div>
+    <!-- RICERCA DOCUMENTI -->
 
-  <div class="section">
-    <h1 style="color: #6e0942;">DOCUMENTI SINDACATO E VARI</h1>
+    <div class="search-box">
+      <h2>Ricerca nei documenti HTML</h2>
 
-    <a href="730.html"><button class="button button2">730</button></a><br>
-    <a href="assicurazionialetheia.html"><button class="button button2">ASSICURAZIONI ALETHEIA</button></a><br>
-    <a href="caf.html"><button class="button button2">CAF</button></a><br>
-    <a href="corsi.html"><button class="button button2">CORSI CISL</button></a><br>
-    <a href="fringebenefit.html"><button class="button button2">FRINGE BENEFIT</button></a><br>
-    <a href="genitorialità.html"><button class="button button2">GENITORIALITA'</button></a><br>
-    <a href="patronato.html"><button class="button button2">PATRONATO</button></a><br>
-    <a href="pensionati.html"><button class="button button2">PENSIONATI</button></a><br>
-    <a href="rls.html"><button class="button button2">RLS</button></a><br>
-  </div>
+      <div class="search-controls">
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="Scrivi una parola chiave, ad esempio: mutui, assicurazioni, permessi..."
+          autocomplete="off"
+          onkeydown="if (event.key === 'Enter') searchPages();"
+        >
 
-  <div class="section">
-    <h1 style="color: #151a9a;">PROSELITISMO</h1>
-    <a href="iscrizione.html"><button class="button button3">ISCRIZIONI</button></a><br>
-  </div>
+        <button
+          type="button"
+          class="button buttonSearch"
+          onclick="searchPages()"
+        >
+          CERCA
+        </button>
+      </div>
+
+      <div id="searchResults" aria-live="polite"></div>
+    </div>
+
+    <!-- CONTRATTO INTEGRATIVO -->
+
+    <section class="section">
+      <h1 class="green-title">CONTRATTO INTEGRATIVO</h1>
+
+      <a class="button button1" href="contrattointegrativo.html">
+        CONTRATTO INTEGRATIVO
+      </a>
+
+      <a class="button button1" href="mutui.html">
+        MUTUI, PRESTITI, CONTI CONVENZIONATI
+      </a>
+
+      <a class="button button1" href="personale.html">
+        PERSONALE
+      </a>
+
+      <a class="button button1" href="vap.html">
+        VAP
+      </a>
+    </section>
+
+    <!-- DOCUMENTI SINDACATO E VARI -->
+
+    <section class="section">
+      <h1 class="purple-title">DOCUMENTI SINDACATO E VARI</h1>
+
+      <a class="button button2" href="730.html">
+        730
+      </a>
+
+      <a class="button button2" href="assicurazionialetheia.html">
+        ASSICURAZIONI ALETHEIA
+      </a>
+
+      <a class="button button2" href="caf.html">
+        CAF
+      </a>
+
+      <a class="button button2" href="corsi.html">
+        CORSI CISL
+      </a>
+
+      <a class="button button2" href="fringebenefit.html">
+        FRINGE BENEFIT
+      </a>
+
+      <a class="button button2" href="genitorialità.html">
+        GENITORIALITÀ
+      </a>
+
+      <a class="button button2" href="patronato.html">
+        PATRONATO
+      </a>
+
+      <a class="button button2" href="pensionati.html">
+        PENSIONATI
+      </a>
+
+      <a class="button button2" href="rls.html">
+        RLS
+      </a>
+    </section>
+
+    <!-- PROSELITISMO -->
+
+    <section class="section">
+      <h1 class="blue-title">PROSELITISMO</h1>
+
+      <a class="button button3" href="iscrizione.html">
+        ISCRIZIONI
+      </a>
+    </section>
+
+  </main>
 
   <script>
     const htmlFiles = [
-      'assegnounico.html',
-      'assicurazioni.html',
-      'assicurazionialetheia.html',
-      'borsestudio.html',
-      'buonipasto.html',
-      'caf.html',
-      'ccnl.html',
-      'contrattointegrativo.html',
-      'corsi.html',
-      'fondopensione.html',
-      'fringebenefit.html',
-      'genitorialità.html',
-      'index.html',
-      'iscrizione.html',
-      'mutui.html',
-      'patronato.html',
-      'pensionati.html',
-      'percorsicarriera.html',
-      'permessi.html',
-      'personale.html'
+      "730.html",
+      "assegnounico.html",
+      "assicurazioni.html",
+      "assicurazionialetheia.html",
+      "borsestudio.html",
+      "buonipasto.html",
+      "caf.html",
+      "ccnl.html",
+      "contrattointegrativo.html",
+      "corsi.html",
+      "fondopensione.html",
+      "fringebenefit.html",
+      "genitorialità.html",
+      "iscrizione.html",
+      "mutui.html",
+      "patronato.html",
+      "pensionati.html",
+      "percorsicarriera.html",
+      "permessi.html",
+      "personale.html",
+      "rls.html",
+      "vap.html"
     ];
 
     function stripHtml(html) {
-      const doc = new DOMParser().parseFromString(html, 'text/html');
-      return (doc.body ? doc.body.textContent : doc.documentElement.textContent || '').replace(/\s+/g, ' ').trim();
+      const doc = new DOMParser().parseFromString(html, "text/html");
+
+      doc
+        .querySelectorAll("script, style, noscript")
+        .forEach(element => element.remove());
+
+      const text =
+        doc.body?.textContent ||
+        doc.documentElement?.textContent ||
+        "";
+
+      return text.replace(/\s+/g, " ").trim();
+    }
+
+    function escapeHtml(text) {
+      const element = document.createElement("div");
+      element.textContent = text;
+      return element.innerHTML;
+    }
+
+    function escapeRegExp(text) {
+      return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     }
 
     function highlightText(text, keyword) {
-      const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`(${escaped})`, 'ig');
-      return text.replace(regex, '<mark>$1</mark>');
+      const safeText = escapeHtml(text);
+      const escapedKeyword = escapeRegExp(keyword);
+      const regex = new RegExp(`(${escapedKeyword})`, "gi");
+
+      return safeText.replace(regex, "<mark>$1</mark>");
     }
 
     async function searchPages() {
-      const keyword = document.getElementById('searchInput').value.trim();
-      const resultsBox = document.getElementById('searchResults');
-      resultsBox.innerHTML = '';
+      const searchInput = document.getElementById("searchInput");
+      const resultsBox = document.getElementById("searchResults");
+      const keyword = searchInput.value.trim();
+
+      resultsBox.innerHTML = "";
 
       if (!keyword) {
-        resultsBox.innerHTML = '<p>Inserisci una parola chiave.</p>';
+        resultsBox.innerHTML =
+          "<p>Inserisci una parola chiave per effettuare la ricerca.</p>";
+
+        searchInput.focus();
         return;
       }
 
-      resultsBox.innerHTML = '<p>Ricerca in corso...</p>';
+      resultsBox.innerHTML = "<p>Ricerca in corso...</p>";
+
+      const lowerKeyword = keyword.toLocaleLowerCase("it");
       const results = [];
 
       for (const file of htmlFiles) {
         try {
-          const response = await fetch(file);
-          if (!response.ok) continue;
+          const response = await fetch(file, {
+            cache: "no-store"
+          });
+
+          if (!response.ok) {
+            console.warn(
+              `Impossibile leggere ${file}. Codice: ${response.status}`
+            );
+            continue;
+          }
 
           const html = await response.text();
           const plainText = stripHtml(html);
-          const lowerText = plainText.toLowerCase();
-          const lowerKeyword = keyword.toLowerCase();
-          const index = lowerText.indexOf(lowerKeyword);
+          const lowerText = plainText.toLocaleLowerCase("it");
+          const foundIndex = lowerText.indexOf(lowerKeyword);
 
-          if (index !== -1) {
-            const start = Math.max(0, index - 80);
-            const end = Math.min(plainText.length, index + keyword.length + 120);
-            const excerpt = plainText.substring(start, end);
-
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            const title = doc.querySelector('h1')?.textContent?.trim() || file;
-
-            results.push({
-              file,
-              title,
-              excerpt: highlightText(excerpt, keyword)
-            });
+          if (foundIndex === -1) {
+            continue;
           }
+
+          const start = Math.max(0, foundIndex - 90);
+
+          const end = Math.min(
+            plainText.length,
+            foundIndex + keyword.length + 140
+          );
+
+          let excerpt = plainText.substring(start, end).trim();
+
+          if (start > 0) {
+            excerpt = "..." + excerpt;
+          }
+
+          if (end < plainText.length) {
+            excerpt = excerpt + "...";
+          }
+
+          const parsedDocument = new DOMParser().parseFromString(
+            html,
+            "text/html"
+          );
+
+          const title =
+            parsedDocument.querySelector("h1")?.textContent?.trim() ||
+            parsedDocument.querySelector("title")?.textContent?.trim() ||
+            file;
+
+          results.push({
+            file: file,
+            title: title,
+            excerpt: highlightText(excerpt, keyword)
+          });
+
         } catch (error) {
-          console.warn(`Errore nella lettura di ${file}:`, error);
+          console.warn(`Errore durante la lettura di ${file}:`, error);
         }
       }
 
       if (results.length === 0) {
-        resultsBox.innerHTML = '<p>Nessun risultato trovato.</p>';
+        resultsBox.innerHTML =
+          `<p>Nessun risultato trovato per <strong>${escapeHtml(keyword)}</strong>.</p>`;
         return;
       }
 
-      resultsBox.innerHTML = `<p><strong>Risultati trovati: ${results.length}</strong></p>` +
-        results.map(result => `
-          <div class="result-card">
-            <h3><a href="${result.file}">${result.title}</a></h3>
-            <p>${result.excerpt}</p>
-          </div>
-        `).join('');
+      const resultsHtml = results
+        .map(result => {
+          return `
+            <article class="result-card">
+              <h3>
+                <a href="${encodeURI(result.file)}">
+                  ${escapeHtml(result.title)}
+                </a>
+              </h3>
+
+              <p>${result.excerpt}</p>
+            </article>
+          `;
+        })
+        .join("");
+
+      resultsBox.innerHTML = `
+        <p>
+          <strong>
+            Risultati trovati: ${results.length}
+          </strong>
+        </p>
+
+        ${resultsHtml}
+      `;
     }
   </script>
+
 </body>
 </html>
