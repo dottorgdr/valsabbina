@@ -312,7 +312,7 @@
   <div class="main-menu-bar">
     <a
       class="main-menu-button"
-      href="https://script.google.com/macros/s/AKfycbx-1cpydI0DhY7VeG33OyEGHh6vs_nbsqr2_nRA8EkehkiAI-hLVwmLd_HAg9JIlrvJ/exec"
+      href="https://app.firstcislvalsabbina.it/" id="mainPortalLink"
       target="_top"
       rel="noopener"
     >
@@ -426,6 +426,21 @@
   </main>
 
   <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const portal = params.get("portal");
+      const link = document.getElementById("mainPortalLink");
+
+      if (portal && link) {
+        try {
+          const url = new URL(portal);
+          if (url.protocol === "https:" || url.protocol === "http:") {
+            link.href = url.href;
+          }
+        } catch (_) {}
+      }
+    })();
+
     const htmlFiles = [
       "730.html",
       "assegnounico.html",
